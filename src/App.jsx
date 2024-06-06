@@ -3,15 +3,15 @@ import React, { useState } from "react";
 
 const App = () => {
   const cookedness = [
-    [100, "💀 give up bro", "#FF0000"],
-    [87.5, "🔥 you're cooked", "#FF5500"],
-    [75, "🥵 burnt", "#FFAA00"],
-    [62.5, "😳 well done", "#FFCC00"],
-    [50, "🥩 medium well", "pink"],
-    [37.5, "🥓 medium rare", "#ffcccc"],
-    [25, "💎 rare", "#bbb"],
-    [12.5, "🙏 ok", "#ddd"],
-    [0, "🫠 everything's fine", "white"],
+    [100, "give up bro 💀", "#FF0000"],
+    [87.5, "you're cooked 🔥", "#FF5500"],
+    [75, "burnt 🥵", "#FFAA00"],
+    [62.5, "well done 😳", "#FFCC00"],
+    [50, "medium well 🥩", "pink"],
+    [37.5, "medium rare 🥓", "#ffcccc"],
+    [25, "lightly toasted 🫓", "#bbb"],
+    [12.5, "ok 🙏", "#ddd"],
+    [0, "everything's fine 🫠", "white"],
   ];
 
   const [cooked, setCooked] = useState([0, "How cooked are you?"]);

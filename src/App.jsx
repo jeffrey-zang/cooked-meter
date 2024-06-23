@@ -34,6 +34,7 @@ const App = () => {
           How cooked are you? Press the button below to discover your
           cookedness.
         </p>
+        <input placeholder="Enter what you're cooked for"></input>
         <button
           onClick={() => {
             getCooked();
@@ -63,6 +64,7 @@ const App = () => {
           {/* <div className="circle"></div> */}
           <div className="semi-circle"></div>
           <p className="desc">{cooked[1]}</p>
+          {/* <button>Share this result</button> */}
         </div>
       </div>
     </div>

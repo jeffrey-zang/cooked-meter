@@ -34,14 +34,16 @@ const App = () => {
           How cooked are you? Press the button below to discover your
           cookedness.
         </p>
-        <input placeholder="Enter what you're cooked for"></input>
-        <button
-          onClick={() => {
-            getCooked();
-          }}
-        >
-          Discover
-        </button>
+        <form className="flex flex-col">
+          <input placeholder="Enter what you're cooked for" className="w-full" />
+          <button
+            onClick={() => {
+              getCooked();
+            }}
+          >
+            Discover
+          </button>
+        </form>
       </div>
 
       <div className="right">

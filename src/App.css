@@ -7,28 +7,26 @@
   transition: all .5s ease;
 }
 
-.left, .right {
-  width: 50%;
+@media screen and (max-width: 768px) {
+  .body {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .left {
+    width: 100%;
+  }
+  .semi-circle {
+    width: 200px;
+    height: 100px;
+    border-radius: 100px 100px 0 0;
+  }
 }
 
 .desc {
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
-}
-
-.not {
-  position: absolute;
-  left: 0rem;
-  transform: translateY(15rem);
-  z-index: 10;
-}
-
-.very {
-  position: absolute;
-  right: 0rem;
-  transform: translateY(15rem);
-  z-index: 10;
 }
 
 .dial {
@@ -39,7 +37,7 @@
   z-index: 10;
   left: 50%;
   transform-origin: bottom;
-  transform: translateX(-50%) translateY(3rem);
+  bottom: 3rem;
   transition: transform .5s ease, rotate .3s ease;
 }
 
@@ -52,6 +50,7 @@
   left: 50%;
   transform-origin: bottom;
   z-index: 5;
+  bottom: 3rem;
   transition: transform .5s ease, rotate .3s ease;
 }
 
@@ -59,16 +58,8 @@
   width: 400px;
   height: 200px;
   border-radius: 200px 200px 0 0;
-  border-bottom: none;
   background-color: #dfdfdf;
   border: 1px solid black;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(3rem);
-  transition: background-color .5s ease;
-}
-
-.dial-c {
   position: relative;
-  transform: translateY(-5rem);
+  transition: background-color .5s ease;
 }

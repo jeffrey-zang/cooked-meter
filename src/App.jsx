@@ -7,22 +7,27 @@ const App = () => {
     [87.5, "you're cooked 🔥", "#FF5500"],
     [75, "burnt 🥵", "#FFAA00"],
     [62.5, "well done 😳", "#FFCC00"],
-    [50, "medium well 🥩", "pink"],
-    [37.5, "medium rare 🥓", "#ffcccc"],
+    [50, "crisp 🥓", "pink"],
+    [37.5, "medium rare 🥩", "#ffcccc"],
     [25, "lightly toasted 🫓", "#bbb"],
     [12.5, "ok 🙏", "#ddd"],
-    [0, "everything's fine 🫠", "white"],
+    [0, "totally fine 🫠", "white"],
   ];
 
   const [cooked, setCooked] = useState([0, "How cooked are you?"]);
   const [color, setColor] = useState("white");
+  const [input, setInput] = useState('');
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
     setCooked([Math.floor(Math.random() * 12.5) + random[0], random[1]]);
     setColor(random[2]);
-    console.log(cooked);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getCooked();
+  }
 
   return (
     <div className="body" style={{
@@ -34,22 +39,19 @@ const App = () => {
           How cooked are you? Press the button below to discover your
           cookedness.
         </p>
-        <form className="flex flex-col">
-          <input placeholder="Enter what you're cooked for" className="w-full" />
-          <button
-            onClick={() => {
-              getCooked();
-            }}
-          >
+        <form onSubmit={handleSubmit}>
+          <input placeholder="Enter what you're cooked for" className="w-full" value={input} onChange={(e) => {setInput(e.target.value)}} />
+          <button type='submit'>
             Discover
           </button>
         </form>
       </div>
 
       <div className="right">
-        <div className="dial-c">
-          <p className="not">Not cooked</p>
-          <p className="very">Very cooked</p>
+        {/* <p className="not">Not cooked</p>
+        <p className="very">Very cooked</p> */}
+        <p className="desc">{cooked[1]}</p>
+        <div className="semi-circle">
           <div
             className="dial"
             style={{
@@ -63,11 +65,8 @@ const App = () => {
           <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(60deg)' }}></div>
           <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(90deg)' }}></div>
           <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(-90deg)' }}></div>
-          {/* <div className="circle"></div> */}
-          <div className="semi-circle"></div>
-          <p className="desc">{cooked[1]}</p>
-          {/* <button>Share this result</button> */}
         </div>
+        {/* <button>Share this result</button> */}
       </div>
     </div>
   );

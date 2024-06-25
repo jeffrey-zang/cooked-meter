@@ -1,6 +1,11 @@
+body {
+  box-sizing: border-box;
+}
+
 .body {
-  padding: 5rem;
-  height: calc(100vh - 10rem);
+  padding-left: 5rem;
+  padding-right: 5rem;
+  height: 100svh;
   display: flex;
   place-items: center;
   gap: 2rem;
@@ -13,13 +18,16 @@
     gap: 1rem;
     padding: 1rem;
   }
-  .left {
-    width: 100%;
-  }
   .semi-circle {
-    width: 200px;
-    height: 100px;
-    border-radius: 100px 100px 0 0;
+    width: 300px !important;
+    height: 150px !important;
+    border-radius: 150px 150px 0 0 !important;
+  }
+  .dial {
+    height: 150px !important;
+  }
+  .line {
+    height: 150px !important;
   }
 }
 

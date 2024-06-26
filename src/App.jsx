@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const App = () => {
   const cookedness = [
     [100, "give up bro 💀", "#FF0000"],
-    [87.5, "you're cooked 🔥", "#FF5500"],
+    [87.5, "totally cooked 🔥", "#FF5500"],
     [75, "burnt 🥵", "#FFAA00"],
     [62.5, "well done 😳", "#FFCC00"],
     [50, "crisp 🥓", "pink"],
@@ -20,7 +20,15 @@ const App = () => {
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
-    setCooked([Math.floor(Math.random() * 12.5) + random[0], random[1]]);
+    const selected = [Math.floor(Math.random() * 12.5) + random[0], random[1]]
+    if (input) {
+      if (selected[1] === "give up bro 💀") {
+        selected[1] = `${input}? ${random[1]}`;
+      } else {
+        selected[1] = `you're ${random[1]} for ${input}`;
+      }
+    }
+    setCooked(selected);
     setColor(random[2]);
   };
 
@@ -39,7 +47,7 @@ const App = () => {
           How cooked are you? Press the button below to discover your
           cookedness.
         </p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form">
           <input placeholder="Enter what you're cooked for" className="w-full" value={input} onChange={(e) => {setInput(e.target.value)}} />
           <button type='submit'>
             Discover

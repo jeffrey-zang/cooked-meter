@@ -8,8 +8,17 @@ body {
   height: 100svh;
   display: flex;
   place-items: center;
-  gap: 2rem;
+  gap: 5rem;
   transition: all .5s ease;
+  justify-content: center;
+}
+
+.form button {
+  display: block;
+  margin-top: 0.25rem;
+}
+.form input {
+  width: 50%;
 }
 
 @media screen and (max-width: 768px) {

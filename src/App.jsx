@@ -148,7 +148,7 @@ const App = () => {
                   <Link
                     to={`${encodeURIComponent(
                       name
-                    )}/${encodeURIComponent(input)}/${encodeURIComponent(
+                    )}/${encodeURIComponent(
                       cooked[1]
                     )}/${encodeURIComponent(color)} `}
                     target="_blank"

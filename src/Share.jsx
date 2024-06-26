@@ -5,12 +5,12 @@ const Share = () => {
   let { name } = useParams();
   let { cooked } = useParams();
   let { color } = useParams();
-  // id = decodeURIComponent(id);
-
-  console.log('wenis')
 
   return (
-    <div>{name}, {cooked}, {color}</div>
+    // <div>{name}, {thing}, {cooked}, {color}</div>
+    <div>
+      <h1 className='title'>{cooked.replace("you're", `${name} is`)}</h1>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import Share from "./Share";
 
 const App = () => {
   const cookedness = [
@@ -143,6 +144,7 @@ const App = () => {
           </div>
         }
       />
+      <Route path="/:id" element={<Share />} />
     </Routes>
   );
 };

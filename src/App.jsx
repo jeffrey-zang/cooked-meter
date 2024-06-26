@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Share from "./Share";
 
 const App = () => {
@@ -19,6 +19,9 @@ const App = () => {
   const [cooked, setCooked] = useState([0, "How cooked are you?"]);
   const [color, setColor] = useState("white");
   const [input, setInput] = useState("");
+
+  const [showShare, setShowShare] = useState(false);
+  const [name, setName] = useState("");
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
@@ -131,14 +134,29 @@ const App = () => {
               </div>
               {input && cooked[1] !== "How cooked are you?" && (
                 <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `${cooked[1]} https://cooked.jeffz.dev/`
-                    );
-                  }}
-                >
+                  onClick={() => setShowShare(true)}>
                   Share this result
                 </button>
+              )}
+              {showShare && (
+                <div className="share">
+                  <input
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <Link
+                    to={`${encodeURIComponent(
+                      name
+                    )}/${encodeURIComponent(input)}/${encodeURIComponent(
+                      cooked[1]
+                    )}/${encodeURIComponent(color)} `}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Share
+                  </Link>
+                </div>
               )}
             </div>
           </div>

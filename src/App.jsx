@@ -74,7 +74,13 @@ const App = () => {
           <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(90deg)' }}></div>
           <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(-90deg)' }}></div>
         </div>
-        {/* <button>Share this result</button> */}
+        {
+          (input && cooked[1] !== "How cooked are you?") && <button onClick={
+            () => {
+              navigator.clipboard.writeText(`${cooked[1]} https://cooked.jeffz.dev/`);
+            }
+          }>Share this result</button>
+        }
       </div>
     </div>
   );

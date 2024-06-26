@@ -2,11 +2,15 @@ import { useParams } from 'react-router-dom';
 
 const Share = () => {
 
-  let { id } = useParams();
-  id = decodeURIComponent(id);
+  let { name } = useParams();
+  let { cooked } = useParams();
+  let { color } = useParams();
+  // id = decodeURIComponent(id);
+
+  console.log('wenis')
 
   return (
-    <div>{id}</div>
+    <div>{name}, {cooked}, {color}</div>
   )
 }
 

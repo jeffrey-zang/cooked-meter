@@ -48,7 +48,7 @@ const App = () => {
         index
         element={
           <div
-            className={`body ${cooked[1] === "give up bro 💀" ? "shake" : ""}`}
+            className={`body ${cooked[1].includes("give up bro 💀") ? "shake" : ""}`}
             style={{
               backgroundColor: `${color}`,
             }}
@@ -61,7 +61,7 @@ const App = () => {
               </p>
               <form onSubmit={handleSubmit} className="form">
                 <input
-                  placeholder="Enter what you're cooked for"
+                  placeholder="Type somethin"
                   className="w-full"
                   value={input}
                   onChange={(e) => {
@@ -162,7 +162,7 @@ const App = () => {
           </div>
         }
       />
-      <Route path="/:id" element={<Share />} />
+      <Route path="/:name/:cooked/:color" element={<Share />} />
     </Routes>
   );
 };

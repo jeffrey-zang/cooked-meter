@@ -38,7 +38,7 @@ const App = () => {
   }
 
   return (
-    <div className="body" style={{
+    <div className={`body ${(cooked[1] === "give up bro 💀") ? "shake" : ""}`} style={{
       backgroundColor: `${color}`,
     }}>
       <div className="left">
@@ -59,7 +59,7 @@ const App = () => {
         {/* <p className="not">Not cooked</p>
         <p className="very">Very cooked</p> */}
         <p className="desc">{cooked[1]}</p>
-        <div className="semi-circle">
+        <div className='semi-circle'>
           <div
             className="dial"
             style={{

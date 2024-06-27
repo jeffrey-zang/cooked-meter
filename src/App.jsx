@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Share from "./Share";
+import Share from "./components/Share/Share";
 import Dial from "./components/Dial";
 
 const App = () => {
@@ -17,17 +17,18 @@ const App = () => {
     [0, "totally fine 🫠", "white"],
   ];
 
-  const [rotation, setRotation] = useState(0)
+  const [rotation, setRotation] = useState(0);
   const [cooked, setCooked] = useState("How cooked are you?");
   const [color, setColor] = useState("white");
   const [input, setInput] = useState("");
 
   const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [name, setName] = useState("");
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
-    let selected = random[1]
+    let selected = random[1];
     if (input) {
       if (selected === "give up bro 💀") {
         selected = `${input}? ${random[1]}`;
@@ -35,7 +36,7 @@ const App = () => {
         selected = `you're ${random[1]} for ${input}`;
       }
     }
-    setRotation(Math.floor(Math.random() * 12.5) + random[0])
+    setRotation(Math.floor(Math.random() * 12.5) + random[0]);
     setCooked(selected);
     setColor(random[2]);
   };
@@ -69,6 +70,7 @@ const App = () => {
                   value={input}
                   onChange={(e) => {
                     setInput(e.target.value);
+                    setCopied(false);
                   }}
                 />
                 <button type="submit">Discover</button>
@@ -79,8 +81,7 @@ const App = () => {
               <p className="desc">{cooked}</p>
               <Dial rotateAmount={rotation} />
               {input && cooked !== "How cooked are you?" && (
-                <button
-                  onClick={() => setShowShare(true)}>
+                <button onClick={() => setShowShare(true)}>
                   Share this result
                 </button>
               )}
@@ -89,22 +90,21 @@ const App = () => {
                   <input
                     placeholder="Enter your name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
-                  <Link
-                    to={`${encodeURIComponent(
-                      name
-                    )}/${encodeURIComponent(
-                      cooked
-                    )}/${encodeURIComponent(
-                      rotation
-                    )}/
-                    ${encodeURIComponent(color)} `}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `http://localhost:5173/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
+                      );
+                      setCopied(true);
+                    }}
                   >
                     Share
-                  </Link>
+                  </button>
+                  {copied && <p>Copied!</p>}
                 </div>
               )}
             </div>

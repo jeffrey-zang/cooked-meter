@@ -9,6 +9,10 @@
   justify-content: center;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .form button {
   display: block;
   margin-top: 0.25rem;

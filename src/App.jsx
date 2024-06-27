@@ -17,7 +17,8 @@ const App = () => {
     [0, "totally fine 🫠", "white"],
   ];
 
-  const [cooked, setCooked] = useState([0, "How cooked are you?"]);
+  const [rotation, setRotation] = useState(0)
+  const [cooked, setCooked] = useState("How cooked are you?");
   const [color, setColor] = useState("white");
   const [input, setInput] = useState("");
 
@@ -26,14 +27,15 @@ const App = () => {
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
-    const selected = [Math.floor(Math.random() * 12.5) + random[0], random[1]];
+    let selected = random[1]
     if (input) {
-      if (selected[1] === "give up bro 💀") {
-        selected[1] = `${input}? ${random[1]}`;
+      if (selected === "give up bro 💀") {
+        selected = `${input}? ${random[1]}`;
       } else {
-        selected[1] = `you're ${random[1]} for ${input}`;
+        selected = `you're ${random[1]} for ${input}`;
       }
     }
+    setRotation(Math.floor(Math.random() * 12.5) + random[0])
     setCooked(selected);
     setColor(random[2]);
   };
@@ -49,7 +51,7 @@ const App = () => {
         index
         element={
           <div
-            className={`body ${cooked[1].includes("give up bro 💀") ? "shake" : ""}`}
+            className={`body ${cooked.includes("give up bro 💀") ? "shake" : ""}`}
             style={{
               backgroundColor: `${color}`,
             }}
@@ -74,9 +76,9 @@ const App = () => {
             </div>
 
             <div className="right">
-              <p className="desc">{cooked[1]}</p>
-              <Dial rotateAmount={cooked[0]} />
-              {input && cooked[1] !== "How cooked are you?" && (
+              <p className="desc">{cooked}</p>
+              <Dial rotateAmount={rotation} />
+              {input && cooked !== "How cooked are you?" && (
                 <button
                   onClick={() => setShowShare(true)}>
                   Share this result
@@ -93,9 +95,9 @@ const App = () => {
                     to={`${encodeURIComponent(
                       name
                     )}/${encodeURIComponent(
-                      cooked[1]
+                      cooked
                     )}/${encodeURIComponent(
-                      selected[0]
+                      rotation
                     )}/
                     ${encodeURIComponent(color)} `}
                     target="_blank"
@@ -109,7 +111,7 @@ const App = () => {
           </div>
         }
       />
-      <Route path="/:name/:cooked/:selected/:color" element={<Share />} />
+      <Route path="/:name/:cooked/:rotation/:color" element={<Share />} />
     </Routes>
   );
 };

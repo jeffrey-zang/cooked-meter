@@ -17,6 +17,12 @@
   width: 50%;
 }
 
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -41,56 +47,10 @@
     gap: 1rem;
     padding: 1rem;
   }
-  .semi-circle {
-    width: 300px !important;
-    height: 150px !important;
-    border-radius: 150px 150px 0 0 !important;
-  }
-  .dial {
-    height: 150px !important;
-  }
-  .line {
-    height: 150px !important;
-  }
 }
 
 .desc {
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
-}
-
-.dial {
-  width: 4px;
-  background-color: black;
-  height: 190px;
-  position: absolute;
-  z-index: 10;
-  left: 50%;
-  transform-origin: bottom;
-  bottom: 3rem;
-  transition: transform .5s ease, rotate .3s ease;
-}
-
-.line {
-  width: 2px;
-  background-color: #ccc;
-  height: 195px;
-  position: absolute;
-  z-index: 10;
-  left: 50%;
-  transform-origin: bottom;
-  z-index: 5;
-  bottom: 3rem;
-  transition: transform .5s ease, rotate .3s ease;
-}
-
-.semi-circle {
-  width: 400px;
-  height: 200px;
-  border-radius: 200px 200px 0 0;
-  background-color: #dfdfdf;
-  border: 1px solid black;
-  position: relative;
-  transition: background-color .5s ease;
 }

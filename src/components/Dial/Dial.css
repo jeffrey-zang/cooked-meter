@@ -1,0 +1,53 @@
+@media screen and (max-width: 768px) {
+  .dial-container {
+    width: 300px !important;
+    height: 150px !important;
+    border-radius: 150px 150px 0 0 !important;
+  }
+  .dial {
+    height: 150px !important;
+  }
+  .line {
+    height: 150px !important;
+  }
+}
+
+.dial-container {
+  width: 400px;
+  height: 200px;
+  border-radius: 200px 200px 0 0;
+  background-color: #dfdfdf;
+  border: 1px solid black;
+  position: relative;
+  transition: background-color .5s ease;
+}
+
+.line {
+  width: 2px;
+  background-color: #ccc;
+  height: 195px;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform-origin: bottom;
+  z-index: 5;
+  bottom: 3rem;
+  transition: transform .5s ease, rotate .3s ease;
+}
+
+.dial {
+  width: 4px;
+  background-color: black;
+  height: 190px;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform-origin: bottom;
+  bottom: 0;
+  transition: transform .5s ease, rotate .3s ease;
+}
+
+.indicator {
+  display: flex;
+  justify-content: space-between;
+}

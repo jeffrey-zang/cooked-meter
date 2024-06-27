@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Share from "./Share";
+import Dial from "./components/Dial";
 
 const App = () => {
   const cookedness = [
@@ -73,65 +74,8 @@ const App = () => {
             </div>
 
             <div className="right">
-              {/* <p className="not">Not cooked</p>
-      <p className="very">Very cooked</p> */}
               <p className="desc">{cooked[1]}</p>
-              <div className="semi-circle">
-                <div
-                  className="dial"
-                  style={{
-                    transform: `translateX(-50%) translateY(3rem) rotate(${cooked[0] * 1.8 - 90}deg)`,
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(-60deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(-30deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform: "translateX(-50%) translateY(3rem) rotate(0deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(30deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(60deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(90deg)",
-                  }}
-                ></div>
-                <div
-                  className="line"
-                  style={{
-                    transform:
-                      "translateX(-50%) translateY(3rem) rotate(-90deg)",
-                  }}
-                ></div>
-              </div>
+              <Dial rotateAmount={cooked[0]} />
               {input && cooked[1] !== "How cooked are you?" && (
                 <button
                   onClick={() => setShowShare(true)}>
@@ -150,7 +94,10 @@ const App = () => {
                       name
                     )}/${encodeURIComponent(
                       cooked[1]
-                    )}/${encodeURIComponent(color)} `}
+                    )}/${encodeURIComponent(
+                      selected[0]
+                    )}/
+                    ${encodeURIComponent(color)} `}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -162,7 +109,7 @@ const App = () => {
           </div>
         }
       />
-      <Route path="/:name/:cooked/:color" element={<Share />} />
+      <Route path="/:name/:cooked/:selected/:color" element={<Share />} />
     </Routes>
   );
 };

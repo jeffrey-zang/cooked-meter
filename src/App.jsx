@@ -1,71 +1,118 @@
 import "./App.css";
 import React, { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Share from "./components/Share/Share";
+import Dial from "./components/Dial";
 
 const App = () => {
   const cookedness = [
     [100, "give up bro 💀", "#FF0000"],
-    [87.5, "you're cooked 🔥", "#FF5500"],
+    [87.5, "totally cooked 🔥", "#FF5500"],
     [75, "burnt 🥵", "#FFAA00"],
     [62.5, "well done 😳", "#FFCC00"],
-    [50, "medium well 🥩", "pink"],
-    [37.5, "medium rare 🥓", "#ffcccc"],
+    [50, "crisp 🥓", "pink"],
+    [37.5, "medium rare 🥩", "#ffcccc"],
     [25, "lightly toasted 🫓", "#bbb"],
     [12.5, "ok 🙏", "#ddd"],
-    [0, "everything's fine 🫠", "white"],
+    [0, "totally fine 🫠", "white"],
   ];
 
-  const [cooked, setCooked] = useState([0, "How cooked are you?"]);
+  const [rotation, setRotation] = useState(0);
+  const [cooked, setCooked] = useState("How cooked are you?");
   const [color, setColor] = useState("white");
+  const [input, setInput] = useState("");
+
+  const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [name, setName] = useState("");
 
   const getCooked = () => {
     const random = cookedness[Math.floor(Math.random() * cookedness.length)];
-    setCooked([Math.floor(Math.random() * 12.5) + random[0], random[1]]);
+    let selected = random[1];
+    if (input) {
+      if (selected === "give up bro 💀") {
+        selected = `${input}? ${random[1]}`;
+      } else {
+        selected = `you're ${random[1]} for ${input}`;
+      }
+    }
+    setRotation(Math.floor(Math.random() * 12.5) + random[0]);
+    setCooked(selected);
     setColor(random[2]);
-    console.log(cooked);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getCooked();
   };
 
   return (
-    <div className="body" style={{
-      backgroundColor: `${color}`,
-    }}>
-      <div className="left">
-        <h1 className="title">Cooked Meter</h1>
-        <p>
-          How cooked are you? Press the button below to discover your
-          cookedness.
-        </p>
-        <button
-          onClick={() => {
-            getCooked();
-          }}
-        >
-          Discover
-        </button>
-      </div>
-
-      <div className="right">
-        <div className="dial-c">
-          <p className="not">Not cooked</p>
-          <p className="very">Very cooked</p>
+    <Routes>
+      <Route
+        index
+        element={
           <div
-            className="dial"
+            className={`body ${cooked.includes("give up bro 💀") ? "shake" : ""}`}
             style={{
-              transform: `translateX(-50%) translateY(3rem) rotate(${cooked[0] * 1.8 - 90}deg)`,
+              backgroundColor: `${color}`,
             }}
-          ></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(-60deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(-30deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(0deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(30deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(60deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(90deg)' }}></div>
-          <div className="line" style={{ transform: 'translateX(-50%) translateY(3rem) rotate(-90deg)' }}></div>
-          {/* <div className="circle"></div> */}
-          <div className="semi-circle"></div>
-          <p className="desc">{cooked[1]}</p>
-        </div>
-      </div>
-    </div>
+          >
+            <div className="left">
+              <h1 className="title">Cooked Meter</h1>
+              <p>
+                How cooked are you? Press the button below to discover your
+                cookedness.
+              </p>
+              <form onSubmit={handleSubmit} className="form">
+                <input
+                  placeholder="Type somethin"
+                  className="w-full"
+                  value={input}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    setCopied(false);
+                  }}
+                />
+                <button type="submit">Discover</button>
+              </form>
+            </div>
+
+            <div className="right">
+              <p className="desc">{cooked}</p>
+              <Dial rotateAmount={rotation} />
+              {input && cooked !== "How cooked are you?" && (
+                <button onClick={() => setShowShare(true)}>
+                  Share this result
+                </button>
+              )}
+              {showShare && (
+                <div className="share">
+                  <input
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `http://localhost:5173/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
+                      );
+                      setCopied(true);
+                    }}
+                  >
+                    Share
+                  </button>
+                  {copied && <p>Copied!</p>}
+                </div>
+              )}
+            </div>
+          </div>
+        }
+      />
+      <Route path="/:name/:cooked/:rotation/:color" element={<Share />} />
+    </Routes>
   );
 };
 

@@ -97,7 +97,7 @@ const App = () => {
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        `https://cooked.jeffz.dev/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
+                        `${import.meta.env.VITE_URL}/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
                       );
                       setCopied(true);
                     }}

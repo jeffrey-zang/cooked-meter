@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Share from "./components/Share/Share";
 import Dial from "./components/Dial";
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   const cookedness = [
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <Routes>
+      <Analytics />
       <Route
         index
         element={

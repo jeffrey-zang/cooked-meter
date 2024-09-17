@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Share from "./components/Share/Share";
 import Dial from "./components/Dial";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   const cookedness = [
@@ -48,73 +48,76 @@ const App = () => {
   };
 
   return (
-    <Routes>
+    <div>
       <Analytics />
-      <Route
-        index
-        element={
-          <div
-            className={`body ${cooked.includes("give up bro 💀") ? "shake" : ""}`}
-            style={{
-              backgroundColor: `${color}`,
-            }}
-          >
-            <div className="left">
-              <h1 className="title">Cooked Meter</h1>
-              <p>
-                How cooked are you? Press the button below to discover your
-                cookedness.
-              </p>
-              <form onSubmit={handleSubmit} className="form">
-                <input
-                  placeholder="Type somethin"
-                  className="w-full"
-                  value={input}
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                    setCopied(false);
-                  }}
-                />
-                <button type="submit">Discover</button>
-              </form>
-            </div>
 
-            <div className="right">
-              <p className="desc">{cooked}</p>
-              <Dial rotateAmount={rotation} />
-              {input && cooked !== "How cooked are you?" && (
-                <button onClick={() => setShowShare(true)}>
-                  Share this result
-                </button>
-              )}
-              {showShare && (
-                <div className="share">
+      <Routes>
+        <Route
+          index
+          element={
+            <div
+              className={`body ${cooked.includes("give up bro 💀") ? "shake" : ""}`}
+              style={{
+                backgroundColor: `${color}`,
+              }}
+            >
+              <div className="left">
+                <h1 className="title">Cooked Meter</h1>
+                <p>
+                  How cooked are you? Press the button below to discover your
+                  cookedness.
+                </p>
+                <form onSubmit={handleSubmit} className="form">
                   <input
-                    placeholder="Enter your name"
-                    value={name}
+                    placeholder="Type somethin"
+                    className="w-full"
+                    value={input}
                     onChange={(e) => {
-                      setName(e.target.value);
+                      setInput(e.target.value);
+                      setCopied(false);
                     }}
                   />
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        `${import.meta.env.VITE_URL}/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
-                      );
-                      setCopied(true);
-                    }}
-                  >
-                    Share
+                  <button type="submit">Discover</button>
+                </form>
+              </div>
+
+              <div className="right">
+                <p className="desc">{cooked}</p>
+                <Dial rotateAmount={rotation} />
+                {input && cooked !== "How cooked are you?" && (
+                  <button onClick={() => setShowShare(true)}>
+                    Share this result
                   </button>
-                  {copied && <p>Copied!</p>}
-                </div>
-              )}
+                )}
+                {showShare && (
+                  <div className="share">
+                    <input
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    />
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${import.meta.env.VITE_URL}/${encodeURIComponent(name)}/${encodeURIComponent(cooked)}/${encodeURIComponent(rotation)}/${encodeURIComponent(color)}`
+                        );
+                        setCopied(true);
+                      }}
+                    >
+                      Share
+                    </button>
+                    {copied && <p>Copied!</p>}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        }
-      />
-      <Route path="/:name/:cooked/:rotation/:color" element={<Share />} />
-    </Routes>
+          }
+        />
+        <Route path="/:name/:cooked/:rotation/:color" element={<Share />} />
+      </Routes>
+    </div>
   );
 };
 
